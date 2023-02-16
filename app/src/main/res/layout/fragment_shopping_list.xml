@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:name="com.houseshare.presentation.ShoppingFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/shoppingList"
+    tools:context=".presentation.shopping.ShoppingFragment"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    tools:itemCount="10"
+    android:paddingBottom="50dp"
+    android:clipToPadding="false"
+    app:layoutManager="LinearLayoutManager"
+    tools:listitem="@layout/fragment_shopping_item" />
+
