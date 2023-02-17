@@ -21,16 +21,31 @@
 
     <include
         android:id="@+id/contentMain"
-        layout="@layout/content_main" />
+        layout="@layout/content_main"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:contentDescription="@string/add_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="bottom|end"
         app:srcCompat="@drawable/ic_add_24"
-        app:layout_anchor="@id/appBar"
-        app:layout_anchorGravity="bottom|end" />
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+<!--    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton-->
+<!--        android:id="@+id/fab"-->
+<!--        android:contentDescription="@string/add_item"-->
+<!--        android:fitsSystemWindows="true"-->
+<!--        android:text="@string/add"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        app:icon="@drawable/ic_add_24"-->
+<!--        android:layout_margin="@dimen/fab_margin"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content" />-->
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

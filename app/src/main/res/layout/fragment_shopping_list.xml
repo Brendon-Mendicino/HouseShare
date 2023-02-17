@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/shoppingList"
-    tools:context=".presentation.shopping.ShoppingFragment"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    tools:itemCount="10"
     android:paddingBottom="50dp"
     android:clipToPadding="false"
     app:layoutManager="LinearLayoutManager"
-    tools:listitem="@layout/fragment_shopping_item" />
+    tools:context=".presentation.shopping.ShoppingFragment"
+    tools:listitem="@layout/fragment_shopping_item"
+    tools:itemCount="20" />
 

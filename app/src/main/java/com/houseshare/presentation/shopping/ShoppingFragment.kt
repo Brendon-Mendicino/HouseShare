@@ -28,6 +28,20 @@ class ShoppingFragment : Fragment() {
         ShoppingItem("fratm"),
         ShoppingItem("fratm"),
         ShoppingItem("fratm"),
+        ShoppingItem("sium"),
+        ShoppingItem("sium"),
+        ShoppingItem("fratm"),
+        ShoppingItem("fratm"),
+        ShoppingItem("fratm"),
+        ShoppingItem("fratm"),
+        ShoppingItem("fratm"),
+        ShoppingItem("fratm"),
+        ShoppingItem("fratm"),
+        ShoppingItem("fratm"),
+        ShoppingItem("fratm"),
+        ShoppingItem("fratm"),
+        ShoppingItem("fratm"),
+        ShoppingItem("fratm"),
     )
 
     private var _binding: FragmentShoppingListBinding? = null
@@ -50,7 +64,9 @@ class ShoppingFragment : Fragment() {
 
         binding.shoppingList.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = ShoppingRecyclerViewAdapter(testList)
+            adapter = ShoppingListAdapter().apply {
+                submitList(testList)
+            }
             addItemDecoration(
                 MaterialDividerItemDecoration(
                     context,

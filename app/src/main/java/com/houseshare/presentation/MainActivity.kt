@@ -3,10 +3,11 @@ package com.houseshare.presentation
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.ViewGroup.MarginLayoutParams
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
+import androidx.core.view.*
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -45,6 +46,8 @@ class MainActivity : AppCompatActivity() {
 
         setupDrawerLayout()
 
+        setupFab()
+
         setupNavigation()
     }
 
@@ -71,6 +74,23 @@ class MainActivity : AppCompatActivity() {
         )
         binding.drawerLayout.addDrawerListener(navViewToggle)
         navViewToggle.syncState()
+    }
+
+    private fun setupFab() {
+        val fabInitialMarginBottom = binding.appBarMain.fab.marginBottom
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.appBarMain.fab) { view, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            view.updateLayoutParams<MarginLayoutParams> {
+                bottomMargin = insets.bottom + fabInitialMarginBottom
+            }
+
+            // Return CONSUMED if you don't want want the window insets to keep being
+            // passed down to descendant views.
+            WindowInsetsCompat.CONSUMED
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
