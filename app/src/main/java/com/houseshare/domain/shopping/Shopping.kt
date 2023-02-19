@@ -1,6 +1,6 @@
 package com.houseshare.domain.shopping
 
-data class ShoppingItem(
+data class Shopping(
     val title: String,
 ) {
 }

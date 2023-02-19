@@ -1,8 +1,6 @@
 package com.houseshare.presentation
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -65,7 +63,9 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        navView.setCheckedItem(R.id.cleaningFragment)
+        navController.currentDestination?.let {
+            navView.setCheckedItem(it.id)
+        }
 
         // TODO: for fab animation 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
@@ -84,9 +84,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupFab() {
+        val fab = binding.appBarMain.fab
         val fabInitialMarginBottom = binding.appBarMain.fab.marginBottom
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.appBarMain.fab) { view, windowInsets ->
+        ViewCompat.setOnApplyWindowInsetsListener(fab) { view, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
 
             view.updateLayoutParams<MarginLayoutParams> {
@@ -98,22 +99,6 @@ class MainActivity : AppCompatActivity() {
             WindowInsetsCompat.CONSUMED
         }
 
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

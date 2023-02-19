@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.MainActivity">
+
+    <item
+        android:id="@+id/checkout"
+        android:title="@string/checkout"
+        app:showAsAction="always"
+        android:icon="@drawable/baseline_shopping_cart_checkout_24" />
+
+
+</menu>

@@ -1,15 +1,17 @@
 package com.houseshare.presentation.shopping
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
+import com.houseshare.R
 import com.houseshare.databinding.FragmentShoppingListBinding
-import com.houseshare.domain.shopping.ShoppingItem
 
 
 /**
@@ -19,46 +21,13 @@ class ShoppingFragment : Fragment() {
 
     companion object {
         const val TAG = "ShoppingFragment"
-        @JvmStatic
-        fun newInstance() =
-            ShoppingFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
     }
 
     private val viewModel: ShoppingViewModel by viewModels()
 
-    private val testList = listOf(
-        ShoppingItem("sium"),
-        ShoppingItem("fratm"),
-        ShoppingItem("fratm"),
-        ShoppingItem("fratm"),
-        ShoppingItem("fratm"),
-        ShoppingItem("fratm"),
-        ShoppingItem("fratm"),
-        ShoppingItem("sium"),
-        ShoppingItem("sium"),
-        ShoppingItem("fratm"),
-        ShoppingItem("fratm"),
-        ShoppingItem("fratm"),
-        ShoppingItem("fratm"),
-        ShoppingItem("fratm"),
-        ShoppingItem("fratm"),
-        ShoppingItem("fratm"),
-        ShoppingItem("fratm"),
-        ShoppingItem("fratm"),
-        ShoppingItem("fratm"),
-        ShoppingItem("fratm"),
-        ShoppingItem("fratm"),
-    )
 
     private var _binding: FragmentShoppingListBinding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,11 +39,14 @@ class ShoppingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(TAG, "onViewCreated: ")
+
+        setupMenuProvider()
 
         binding.shoppingList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = ShoppingListAdapter().apply {
-                submitList(testList)
+                submitList(viewModel.testList.value)
             }
             addItemDecoration(
                 MaterialDividerItemDecoration(
@@ -85,6 +57,29 @@ class ShoppingFragment : Fragment() {
                 }
             )
         }
+    }
+
+    private fun setupMenuProvider() {
+        (requireActivity() as MenuHost).addMenuProvider(
+            object : MenuProvider {
+                override fun onPrepareMenu(menu: Menu) {
+                }
+
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.shopping_menu, menu)
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    return when (menuItem.itemId) {
+                        R.id.checkout -> true
+                        else -> false
+                    }
+                }
+
+            },
+            viewLifecycleOwner,
+            Lifecycle.State.RESUMED
+        )
     }
 
     override fun onDestroy() {

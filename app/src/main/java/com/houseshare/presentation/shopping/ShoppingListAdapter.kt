@@ -6,18 +6,18 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.houseshare.databinding.FragmentShoppingItemBinding
-import com.houseshare.domain.shopping.ShoppingItem
+import com.houseshare.domain.shopping.Shopping
 
 class ShoppingListAdapter :
-    ListAdapter<ShoppingItem, ShoppingListAdapter.ShoppingViewHolder>(ShoppingDiffCallback) {
+    ListAdapter<Shopping, ShoppingListAdapter.ShoppingViewHolder>(ShoppingDiffCallback) {
 
 
-    object ShoppingDiffCallback : DiffUtil.ItemCallback<ShoppingItem>() {
-        override fun areItemsTheSame(oldItem: ShoppingItem, newItem: ShoppingItem): Boolean {
+    object ShoppingDiffCallback : DiffUtil.ItemCallback<Shopping>() {
+        override fun areItemsTheSame(oldItem: Shopping, newItem: Shopping): Boolean {
             return oldItem::class == newItem::class
         }
 
-        override fun areContentsTheSame(oldItem: ShoppingItem, newItem: ShoppingItem): Boolean {
+        override fun areContentsTheSame(oldItem: Shopping, newItem: Shopping): Boolean {
             return oldItem == newItem
         }
 
@@ -34,7 +34,7 @@ class ShoppingListAdapter :
             }
         }
 
-        fun bind(model: ShoppingItem) {
+        fun bind(model: Shopping) {
             binding.avatar.letter.text = model.title.first().uppercase()
             binding.title.text = model.title
         }
