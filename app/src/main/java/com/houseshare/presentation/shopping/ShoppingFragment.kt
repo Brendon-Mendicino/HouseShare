@@ -11,12 +11,21 @@ import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.houseshare.databinding.FragmentShoppingListBinding
 import com.houseshare.domain.shopping.ShoppingItem
 
-const val TAG = "ShoppingFragment"
 
 /**
  * A fragment representing a list of Items.
  */
 class ShoppingFragment : Fragment() {
+
+    companion object {
+        const val TAG = "ShoppingFragment"
+        @JvmStatic
+        fun newInstance() =
+            ShoppingFragment().apply {
+                arguments = Bundle().apply {
+                }
+            }
+    }
 
     private val viewModel: ShoppingViewModel by viewModels()
 
@@ -54,7 +63,7 @@ class ShoppingFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentShoppingListBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -83,13 +92,4 @@ class ShoppingFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance() =
-            ShoppingFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
-    }
 }

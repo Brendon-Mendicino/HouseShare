@@ -9,10 +9,10 @@ import com.houseshare.databinding.FragmentShoppingItemBinding
 import com.houseshare.domain.shopping.ShoppingItem
 
 class ShoppingListAdapter :
-    ListAdapter<ShoppingItem, ShoppingListAdapter.ShoppingViewHolder>(ShoppingDiffCallback()) {
+    ListAdapter<ShoppingItem, ShoppingListAdapter.ShoppingViewHolder>(ShoppingDiffCallback) {
 
 
-    private class ShoppingDiffCallback : DiffUtil.ItemCallback<ShoppingItem>() {
+    object ShoppingDiffCallback : DiffUtil.ItemCallback<ShoppingItem>() {
         override fun areItemsTheSame(oldItem: ShoppingItem, newItem: ShoppingItem): Boolean {
             return oldItem::class == newItem::class
         }
@@ -39,7 +39,6 @@ class ShoppingListAdapter :
             binding.title.text = model.title
         }
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingViewHolder {
         return ShoppingViewHolder(

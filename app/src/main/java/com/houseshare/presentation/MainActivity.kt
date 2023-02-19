@@ -15,11 +15,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.houseshare.R
 import com.houseshare.databinding.ActivityMainBinding
-import com.houseshare.viewmodel.MainViewModel
-
-const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        const val TAG = "MainActivity"
+    }
 
     private val topLevelDestinationIds = setOf(
         R.id.shoppingFragment,
@@ -63,6 +64,12 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navView.setCheckedItem(R.id.cleaningFragment)
+
+        // TODO: for fab animation 
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        }
     }
 
 

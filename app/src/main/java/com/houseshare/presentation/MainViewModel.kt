@@ -1,4 +1,4 @@
-package com.houseshare.viewmodel
+package com.houseshare.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
