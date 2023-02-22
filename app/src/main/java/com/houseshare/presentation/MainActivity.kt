@@ -7,6 +7,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.*
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -52,7 +53,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupNavigation() {
         val navView = binding.navView
-        val navController = findNavController(R.id.navHostFragmentHouse)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragmentHouse) as NavHostFragment
+        val navController = navHostFragment.navController
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
