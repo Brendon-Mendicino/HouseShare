@@ -51,13 +51,20 @@ class ShoppingFragment : Fragment() {
 
         setupMenuProvider()
 
+        setupRecyclerView()
+
+
+    }
+
+    private fun setupRecyclerView() {
+        val recyclerView = binding.shoppingList
+
         listAdapter = ShoppingListAdapter { shopping, isChecked ->
             viewModel.onShoppingToggle(shopping, isChecked)
-        }.apply {
-            submitList(viewModel.shoppingList.value)
         }
+        listAdapter.submitList(viewModel.shoppingList.value)
 
-        binding.shoppingList.apply {
+        recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = listAdapter
             addItemDecoration(
@@ -75,9 +82,8 @@ class ShoppingFragment : Fragment() {
         }
 
         val itemTouchHelper = ItemTouchHelper(SwipeHelperCallback())
-        itemTouchHelper.attachToRecyclerView(binding.shoppingList)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
-
 
     private fun setupMenuProvider() {
 

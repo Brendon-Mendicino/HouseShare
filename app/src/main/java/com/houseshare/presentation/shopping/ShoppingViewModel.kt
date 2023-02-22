@@ -4,48 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.houseshare.domain.shopping.Shopping
-import java.time.LocalDateTime
+import com.houseshare.domain.shopping.ShoppingRepository
 import java.util.*
 
-class ShoppingViewModel : ViewModel() {
+class ShoppingViewModel(
+    private val shoppingRepository: ShoppingRepository = ShoppingRepository()
+) : ViewModel() {
 
-    private val _shoppingList: MutableLiveData<List<Shopping>> = MutableLiveData(
-
-        listOf(
-            "sium",
-            "fratm",
-            "fratm",
-            "fratm",
-            "fratm",
-            "fratm",
-            "fratm",
-            "sium",
-            "sium",
-            "fratm",
-            "fratm",
-            "fratm",
-            "fratm",
-            "fratm",
-            "fratm",
-            "fratm",
-            "fratm",
-            "fratm",
-            "fratm",
-            "fratm",
-            "fratm",
-        )
-            .asSequence()
-            .withIndex()
-            .map {
-                Shopping(
-                    id = it.index,
-                    creationDate = LocalDateTime.now(),
-                    title = it.value,
-                    isChecked = false
-                )
-            }
-            .toList()
-    )
+    private val _shoppingList: MutableLiveData<List<Shopping>> = MutableLiveData(shoppingRepository.getShoppingList())
     val shoppingList: LiveData<List<Shopping>> = _shoppingList
 
     private val _selectedShoppingList: MutableLiveData<SortedSet<Shopping>> = MutableLiveData(

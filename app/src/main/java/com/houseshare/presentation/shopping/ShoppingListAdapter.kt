@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.checkbox.MaterialCheckBox
 import com.houseshare.databinding.FragmentShoppingItemBinding
 import com.houseshare.domain.shopping.Shopping
 import java.time.format.DateTimeFormatter
@@ -46,8 +47,8 @@ class ShoppingListAdapter(
             binding.avatar.letter.text = model.title.first().uppercase()
             binding.title.text = model.title
             binding.checkbox.isChecked = model.isChecked
-            binding.checkbox.setOnCheckedChangeListener { _, isChecked ->
-                onToggleListener(model, isChecked)
+            binding.checkbox.setOnClickListener {
+                onToggleListener(model, (it as MaterialCheckBox).isChecked)
             }
             binding.date.text = DateTimeFormatter
                 .ofPattern("dd MMM yyyy")
