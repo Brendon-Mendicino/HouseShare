@@ -65,4 +65,9 @@
     <color name="md_theme_dark_surfaceTint">#FFB86B</color>
     <color name="md_theme_dark_outlineVariant">#50453A</color>
     <color name="md_theme_dark_scrim">#000000</color>
+
+
+
+    <color name="desaturated_green">#569556</color>
+    <color name="desaturated_red">#9B4244</color>
 </resources>

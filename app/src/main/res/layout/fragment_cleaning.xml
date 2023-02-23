@@ -5,14 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".presentation.cleaning.CleaningFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
 
-    <com.google.android.material.button.MaterialButton
-        android:text="sium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cleaningList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:itemCount="12"
+        tools:listitem="@layout/fragment_cleaning_item" />
 
 </FrameLayout>

@@ -47,6 +47,7 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+
     <string name="shopping_list">Shopping list</string>
     <string name="cleaning">Cleaning</string>
     <string name="house_activities">House activities</string>
@@ -58,4 +59,8 @@
     <string name="delete">Delete</string>
     <string name="deleting_item_description">By removing the current items they will be permanently deleted. Continue?</string>
     <string name="delete_with_number">Delete%1$s</string>
+    <string name="completed">Completed</string>
+    <string name="incomplete">Incomplete</string>
+    <string name="week_with_number">Week: %1$d</string>
+    <string name="date_interval">Interval: %1$s</string>
 </resources>
