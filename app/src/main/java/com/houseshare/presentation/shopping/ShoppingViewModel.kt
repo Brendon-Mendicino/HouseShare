@@ -8,8 +8,8 @@ import com.houseshare.domain.shopping.ShoppingRepository
 import java.util.*
 
 class ShoppingViewModel(
-    private val shoppingRepository: ShoppingRepository = ShoppingRepository()
 ) : ViewModel() {
+    private val shoppingRepository: ShoppingRepository = ShoppingRepository()
 
     private val _shoppingList: MutableLiveData<List<Shopping>> = MutableLiveData(shoppingRepository.getShoppingList())
     val shoppingList: LiveData<List<Shopping>> = _shoppingList
@@ -31,6 +31,20 @@ class ShoppingViewModel(
             if (it.remove(shopping)) {
                 _selectedShoppingList.value = it
             }
+        }
+    }
+
+    fun removeShopping(shoppingList: List<Shopping>) {
+        _shoppingList.value?.toMutableList()?.let {
+            val list = it
+            list.removeAll(shoppingList)
+            _shoppingList.value = list
+        }
+
+        _selectedShoppingList.value?.let {
+            val list = it
+            list.removeAll(shoppingList.toSet())
+            _selectedShoppingList.value = list
         }
     }
 

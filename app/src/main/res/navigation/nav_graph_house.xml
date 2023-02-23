@@ -9,12 +9,24 @@
         android:id="@+id/shoppingFragment"
         android:name="com.houseshare.presentation.shopping.ShoppingFragment"
         android:label="@string/shopping_list"
-        tools:layout="@layout/fragment_shopping_list" />
+        tools:layout="@layout/fragment_shopping_list" >
+        <action
+            android:id="@+id/action_shoppingFragment_to_shoppingDeleteDialogFragment"
+            app:destination="@id/shoppingDeleteDialogFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/cleaningFragment"
         android:name="com.houseshare.presentation.cleaning.CleaningFragment"
         android:label="@string/cleaning"
         tools:layout="@layout/fragment_cleaning" />
+    <dialog
+        android:id="@+id/shoppingDeleteDialogFragment"
+        android:name="com.houseshare.presentation.shopping.ShoppingDeleteDialogFragment"
+        android:label="ShoppingDeleteDialogFragment" >
+        <action
+            android:id="@+id/action_shoppingDeleteDialogFragment_to_shoppingFragment"
+            app:destination="@id/shoppingFragment" />
+    </dialog>
 
 </navigation>

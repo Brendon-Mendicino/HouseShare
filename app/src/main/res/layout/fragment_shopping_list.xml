@@ -8,7 +8,6 @@
     android:id="@+id/shoppingList"
     android:paddingBottom="50dp"
     android:clipToPadding="false"
-    app:layoutManager="LinearLayoutManager"
     tools:context=".presentation.shopping.ShoppingFragment"
     tools:listitem="@layout/fragment_shopping_item"
     tools:itemCount="20" />

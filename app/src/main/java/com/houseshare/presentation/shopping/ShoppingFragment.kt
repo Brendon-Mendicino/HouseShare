@@ -10,12 +10,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.houseshare.R
 import com.houseshare.databinding.FragmentShoppingListBinding
 import com.houseshare.presentation.util.getColorFromAttribute
@@ -30,7 +30,7 @@ class ShoppingFragment : Fragment() {
         const val TAG = "ShoppingFragment"
     }
 
-    private val viewModel: ShoppingViewModel by viewModels()
+    private val viewModel: ShoppingViewModel by activityViewModels()
 
     private lateinit var listAdapter: ShoppingListAdapter
 
@@ -52,8 +52,6 @@ class ShoppingFragment : Fragment() {
         setupMenuProvider()
 
         setupRecyclerView()
-
-
     }
 
     private fun setupRecyclerView() {
@@ -67,14 +65,6 @@ class ShoppingFragment : Fragment() {
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = listAdapter
-            addItemDecoration(
-                MaterialDividerItemDecoration(
-                    context,
-                    LinearLayoutManager.VERTICAL
-                ).apply {
-                    isLastItemDecorated = false
-                }
-            )
         }
 
         viewModel.shoppingList.observe(viewLifecycleOwner) {
@@ -98,6 +88,7 @@ class ShoppingFragment : Fragment() {
                     val checkoutValue = viewModel.selectedShoppingList.value?.isNotEmpty() ?: false
 
                     menu.findItem(R.id.checkout).isVisible = checkoutValue
+                    menu.findItem(R.id.delete).isVisible = checkoutValue
                 }
 
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -107,6 +98,13 @@ class ShoppingFragment : Fragment() {
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                     return when (menuItem.itemId) {
                         R.id.checkout -> true
+                        R.id.delete -> {
+                            val action = ShoppingFragmentDirections
+                                .actionShoppingFragmentToShoppingDeleteDialogFragment()
+                                .actionId
+                            findNavController().navigate(action)
+                            true
+                        }
                         else -> false
                     }
                 }
@@ -134,9 +132,10 @@ class ShoppingFragment : Fragment() {
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             val position = viewHolder.bindingAdapterPosition
+            val shopping = listAdapter.currentList[position]
 
             when (direction) {
-                ItemTouchHelper.START -> viewModel.removeShopping(listAdapter.currentList[position])
+                ItemTouchHelper.START -> viewModel.removeShopping(shopping)
             }
         }
 
@@ -166,7 +165,7 @@ class ShoppingFragment : Fragment() {
                 val icon =
                     ContextCompat.getDrawable(context, R.drawable.ic_delete_24) ?: return@with
 
-                val halfIcon = icon.intrinsicHeight / 2;
+                val halfIcon = icon.intrinsicHeight / 2
                 val iconTop = top + ((bottom - top) / 2 - halfIcon)
                 val iconLeft = right - halfIcon * 2
 

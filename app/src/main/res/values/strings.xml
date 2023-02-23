@@ -55,4 +55,7 @@
     <string name="checkout">Checkout</string>
     <string name="title">Title</string>
     <string name="date_picked">Date picked</string>
+    <string name="delete">Delete</string>
+    <string name="deleting_item_description">By removing the current items they will be permanently deleted. Continue?</string>
+    <string name="delete_with_number">Delete%1$s</string>
 </resources>
