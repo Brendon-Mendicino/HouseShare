@@ -8,8 +8,8 @@ import com.houseshare.domain.shopping.ShoppingRepository
 import java.util.*
 
 class ShoppingViewModel(
-) : ViewModel() {
     private val shoppingRepository: ShoppingRepository = ShoppingRepository()
+) : ViewModel() {
 
     private val _shoppingList: MutableLiveData<List<Shopping>> = MutableLiveData(shoppingRepository.getShoppingList())
     val shoppingList: LiveData<List<Shopping>> = _shoppingList

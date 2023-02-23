@@ -40,7 +40,7 @@ class ShoppingListAdapter(
     }
 
     inner class ShoppingViewHolder(
-        val binding: FragmentShoppingItemBinding,
+        private val binding: FragmentShoppingItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(model: Shopping, onToggleListener: (Shopping, Boolean) -> Unit) {

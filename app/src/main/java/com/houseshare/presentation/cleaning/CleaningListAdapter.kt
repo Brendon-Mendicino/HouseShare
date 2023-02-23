@@ -26,7 +26,7 @@ class CleaningListAdapter :
     }
 
     inner class CleaningViewHolder(
-        val binding: FragmentCleaningItemBinding
+        private val binding: FragmentCleaningItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(cleaning: Cleaning) {

@@ -7,6 +7,4 @@ data class Shopping(
     val creationDate: LocalDateTime,
     val title: String,
     val isChecked: Boolean = false,
-) {
-
-}
+)
