@@ -5,4 +5,6 @@
     <dimen name="text_margin">16dp</dimen>
 
     <dimen name="item_with_avatar_height">72dp</dimen>
+
+    <dimen name="card_cleaning_list_corner">12dp</dimen>
 </resources>

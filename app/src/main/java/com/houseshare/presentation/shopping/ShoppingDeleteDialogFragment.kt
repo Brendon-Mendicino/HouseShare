@@ -21,7 +21,7 @@ class ShoppingDeleteDialogFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentShoppingDeleteDialogBinding.inflate(layoutInflater)
+        _binding = FragmentShoppingDeleteDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
 

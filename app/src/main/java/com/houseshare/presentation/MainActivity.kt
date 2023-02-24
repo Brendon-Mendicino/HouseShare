@@ -1,6 +1,7 @@
 package com.houseshare.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -53,24 +54,36 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupNavigation() {
         val navView = binding.navView
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragmentHouse) as NavHostFragment
+        val toolbar = binding.appBarMain.toolbar
+        val drawerLayout = binding.drawerLayout
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.navHostFragmentHouse) as NavHostFragment
         val navController = navHostFragment.navController
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             topLevelDestinationIds,
-            binding.drawerLayout
+            drawerLayout
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        toolbar.setupWithNavController(navController, appBarConfiguration)
 
         navController.currentDestination?.let {
             navView.setCheckedItem(it.id)
         }
 
-        // TODO: for fab animation 
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        binding.run { 
+            navController.addOnDestinationChangedListener { controller, destination, arguments ->
+                when(destination.id) {
+                    R.id.cleaningExploreFragment -> appBarMain.fab.hide()
+                    else -> appBarMain.fab.show() 
+                }
+            }
+            
         }
     }
 
@@ -100,10 +113,10 @@ class MainActivity : AppCompatActivity() {
             // passed down to descendant views.
             WindowInsetsCompat.CONSUMED
         }
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
+        Log.d(TAG, "onSupportNavigateUp: ")
         val navController = findNavController(R.id.navHostFragmentHouse)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()

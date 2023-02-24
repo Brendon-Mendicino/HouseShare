@@ -41,7 +41,7 @@ class ShoppingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentShoppingListBinding.inflate(layoutInflater)
+        _binding = FragmentShoppingListBinding.inflate(inflater, container, false)
         return binding.root
     }
 

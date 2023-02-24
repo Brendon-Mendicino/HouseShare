@@ -13,4 +13,11 @@ class CleaningViewModel(
     private val _cleaningList = MutableLiveData(cleaningRepository.getCleaningList())
     val cleaningList: LiveData<List<Cleaning>> = _cleaningList
 
+    private val _selectedCleaning = MutableLiveData<Cleaning>(null)
+    val selectedCleaning: LiveData<Cleaning> = _selectedCleaning
+
+    fun setSelectedCleaning(cleaning: Cleaning) {
+        _selectedCleaning.value = cleaning
+    }
+
 }

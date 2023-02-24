@@ -63,4 +63,7 @@
     <string name="incomplete">Incomplete</string>
     <string name="week_with_number">Week: %1$d</string>
     <string name="date_interval">Interval: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cleaning_container_transition_name">cleaning_container_transition_name</string>
 </resources>

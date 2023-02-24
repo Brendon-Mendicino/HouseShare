@@ -3,6 +3,7 @@ package com.houseshare.presentation.cleaning
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
@@ -13,7 +14,9 @@ import com.houseshare.databinding.FragmentCleaningItemBinding
 import com.houseshare.domain.cleaning.Cleaning
 import java.time.format.DateTimeFormatter
 
-class CleaningListAdapter :
+class CleaningListAdapter(
+    private val onClickListener: OnClickListener
+) :
     ListAdapter<Cleaning, CleaningListAdapter.CleaningViewHolder>(CleaningDiffCallback) {
 
 
@@ -26,10 +29,10 @@ class CleaningListAdapter :
     }
 
     inner class CleaningViewHolder(
-        private val binding: FragmentCleaningItemBinding
+        private val binding: FragmentCleaningItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(cleaning: Cleaning) {
+        fun bind(cleaning: Cleaning, onClickListener: OnClickListener) {
             val context = binding.week.context
             val resources = binding.week.context.resources
             val firstDate = DateTimeFormatter
@@ -62,6 +65,13 @@ class CleaningListAdapter :
             binding.completeIndicator.compoundDrawablesRelative.filterNotNull().forEach {
                 it.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
             }
+
+            // set unique transition name
+            binding.root.transitionName = "cleaning${cleaning.id}"
+
+            binding.root.setOnClickListener {
+                onClickListener.onClick(itemView, cleaning)
+            }
         }
     }
 
@@ -74,6 +84,10 @@ class CleaningListAdapter :
     }
 
     override fun onBindViewHolder(holder: CleaningViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        holder.bind(currentList[position], onClickListener)
     }
+}
+
+fun interface OnClickListener {
+    fun onClick(view: View, cleaning: Cleaning)
 }

@@ -2,10 +2,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="0dp"
-    app:cardCornerRadius="12dp"
+    app:cardCornerRadius="@dimen/card_cleaning_list_corner"
     android:layout_marginHorizontal="24dp"
     android:layout_marginTop="8dp"
     android:background="?attr/colorSurfaceVariant"
+    android:foreground="?attr/selectableItemBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
