@@ -35,6 +35,7 @@
         android:focusable="true"
         android:clickable="true"
         android:drawableTint="?attr/colorOnSurface"
+        android:minHeight="48dp"
         app:drawableStartCompat="@drawable/ic_delete_24"
         app:layout_constraintTop_toBottomOf="@id/description"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -4,7 +4,8 @@
     <dimen name="list_item_spacing_half">8dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
-    <dimen name="item_with_avatar_height">72dp</dimen>
+    <dimen name="material_one_line_list_item_height">56dp</dimen>
+    <dimen name="material_two_line_list_item_height">72dp</dimen>
 
     <dimen name="card_cleaning_list_corner">12dp</dimen>
 </resources>

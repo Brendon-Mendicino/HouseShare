@@ -8,11 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.WindowCompat
-import androidx.core.view.doOnPreDraw
+import androidx.core.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.motion.MotionUtils
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -32,6 +32,9 @@ class CleaningExploreFragment : Fragment() {
 
     private var _binding: FragmentCleaningExploreBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var listAdapter: CleaningInfoListAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +83,12 @@ class CleaningExploreFragment : Fragment() {
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
 
+        setupTexts()
+
+        setupRecyclerView()
+    }
+
+    private fun setupTexts() {
         binding.run {
             viewModel.selectedCleaning.observe(viewLifecycleOwner) {
                 val context = context ?: return@observe
@@ -118,6 +127,20 @@ class CleaningExploreFragment : Fragment() {
                     drawable.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
                 }
             }
+        }
+    }
+
+    private fun setupRecyclerView() {
+        listAdapter = CleaningInfoListAdapter()
+        listAdapter.submitList(viewModel.selectedCleaning.value?.cleaningUsers)
+
+        binding.userList.apply {
+            adapter = listAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+
+        viewModel.selectedCleaning.observe(viewLifecycleOwner) {
+            listAdapter.submitList(it.cleaningUsers)
         }
     }
 
