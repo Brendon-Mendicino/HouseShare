@@ -45,6 +45,11 @@ class ShoppingFragment : Fragment() {
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "onViewCreated: ")
@@ -113,11 +118,6 @@ class ShoppingFragment : Fragment() {
             viewLifecycleOwner,
             Lifecycle.State.RESUMED
         )
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 
     inner class SwipeHelperCallback : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.START) {

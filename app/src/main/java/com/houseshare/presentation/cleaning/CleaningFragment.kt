@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.motion.MotionUtils
 import com.google.android.material.transition.MaterialElevationScale
 import com.houseshare.R
@@ -57,8 +57,8 @@ class CleaningFragment : Fragment() {
         return binding.root
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 
@@ -88,7 +88,7 @@ class CleaningFragment : Fragment() {
 
         binding.cleaningList.apply {
             adapter = listAdapter
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = GridLayoutManager(context, 2)
         }
 
         viewModel.cleaningList.observe(viewLifecycleOwner) {
