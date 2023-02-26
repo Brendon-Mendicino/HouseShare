@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         app:drawableEndCompat="@drawable/id_done_24"
+        android:drawableTint="?colorOnSurfaceVariant"
+        android:textColor="?colorOnSurfaceVariant"
         android:drawablePadding="16dp"
         android:layout_marginStart="8dp"
         android:text="@string/title"

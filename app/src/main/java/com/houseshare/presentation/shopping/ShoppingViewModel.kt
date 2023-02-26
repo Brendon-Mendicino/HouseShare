@@ -11,7 +11,8 @@ class ShoppingViewModel(
     private val shoppingRepository: ShoppingRepository = ShoppingRepository()
 ) : ViewModel() {
 
-    private val _shoppingList: MutableLiveData<List<Shopping>> = MutableLiveData(shoppingRepository.getShoppingList())
+    private val _shoppingList: MutableLiveData<List<Shopping>> =
+        MutableLiveData(shoppingRepository.getShoppingList())
     val shoppingList: LiveData<List<Shopping>> = _shoppingList
 
     private val _selectedShoppingList: MutableLiveData<SortedSet<Shopping>> = MutableLiveData(
@@ -54,13 +55,7 @@ class ShoppingViewModel(
         list.indexOfFirst { it == shopping }.let {
             if (it == -1) return
 
-            val newShopping = list[it].run {
-                copy(
-                    creationDate = creationDate,
-                    title = title,
-                    isChecked = isChecked
-                )
-            }
+            val newShopping = list[it].copy(isChecked = isChecked)
 
             list[it] = newShopping
 

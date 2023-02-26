@@ -15,7 +15,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.houseshare.R
 import com.houseshare.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     companion object {
@@ -45,11 +48,11 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
+        setupNavigation()
+
         setupDrawerLayout()
 
         setupFab()
-
-        setupNavigation()
     }
 
     private fun setupNavigation() {
@@ -68,23 +71,36 @@ class MainActivity : AppCompatActivity() {
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
-
         toolbar.setupWithNavController(navController, appBarConfiguration)
 
-        navController.currentDestination?.let {
-            navView.setCheckedItem(it.id)
-        }
 
-        binding.run { 
+        // Set initial destination:
+        // the nav navGraph needs to be inflated programmatically,
+        // the value "app:navGraph" needs to be removed from xml
+        // https://developer.android.com/guide/navigation/navigation-programmatic#modify_inflated
+        val navGraph = navController.navInflater.inflate(R.navigation.nav_graph_house)
+        viewModel.fetchStartingDestination().let {
+            navGraph.setStartDestination(it)
+            navView.setCheckedItem(it)
+        }
+        navController.graph = navGraph
+
+        binding.run {
             navController.addOnDestinationChangedListener { controller, destination, arguments ->
                 when(destination.id) {
                     R.id.cleaningExploreFragment -> appBarMain.fab.hide()
                     else -> appBarMain.fab.show() 
                 }
+
+                if (topLevelDestinationIds.contains(destination.id)) {
+                    viewModel.updateStartingDestination(destination.id)
+                }
             }
             
         }
+
+        navView.setupWithNavController(navController)
+
     }
 
 

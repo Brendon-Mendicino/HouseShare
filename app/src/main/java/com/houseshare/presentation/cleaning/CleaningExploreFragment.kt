@@ -20,6 +20,7 @@ import com.google.android.material.transition.MaterialContainerTransform
 import com.houseshare.R
 import com.houseshare.databinding.FragmentCleaningExploreBinding
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -42,12 +43,12 @@ class CleaningExploreFragment : Fragment() {
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             duration = MotionUtils.resolveThemeDuration(
                 requireContext(),
-                com.google.android.material.R.attr.motionDurationMedium4,
+                com.google.android.material.R.attr.motionDurationLong2,
                 500
             ).toLong()
             interpolator = MotionUtils.resolveThemeInterpolator(
                 requireContext(),
-                com.google.android.material.R.attr.motionEasingEmphasizedAccelerateInterpolator,
+                com.google.android.material.R.attr.motionEasingEmphasizedDecelerateInterpolator,
                 FastOutSlowInInterpolator()
             )
             scrimColor = Color.TRANSPARENT
@@ -98,7 +99,7 @@ class CleaningExploreFragment : Fragment() {
                     .ofPattern("EEE dd MMM yyyy")
                     .format(cleaning.referenceWeek.start)
                 val lastDate = DateTimeFormatter
-                    .ofPattern("dd MMM yyyy")
+                    .ofPattern("EEE dd MMM yyyy")
                     .format(cleaning.referenceWeek.endInclusive)
 
                 week.text = cleaning.id.toString()

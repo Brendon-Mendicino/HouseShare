@@ -35,14 +35,14 @@ class CleaningFragment : Fragment() {
         exitTransition = MaterialElevationScale(false).apply {
             duration = MotionUtils.resolveThemeDuration(
                 requireContext(),
-                com.google.android.material.R.attr.motionDurationMedium4,
+                com.google.android.material.R.attr.motionDurationLong2,
                 500
             ).toLong()
         }
         reenterTransition = MaterialElevationScale(true).apply {
             duration = MotionUtils.resolveThemeDuration(
                 requireContext(),
-                com.google.android.material.R.attr.motionDurationMedium4,
+                com.google.android.material.R.attr.motionDurationLong2,
                 500
             ).toLong()
         }
