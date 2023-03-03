@@ -10,6 +10,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.transition.Transition
+import androidx.transition.TransitionListenerAdapter
 import com.google.android.material.motion.MotionUtils
 import com.google.android.material.transition.MaterialElevationScale
 import com.houseshare.R
@@ -32,20 +34,27 @@ class CleaningFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        exitTransition = MaterialElevationScale(false).apply {
-            duration = MotionUtils.resolveThemeDuration(
-                requireContext(),
-                com.google.android.material.R.attr.motionDurationLong2,
-                500
-            ).toLong()
-        }
-        reenterTransition = MaterialElevationScale(true).apply {
-            duration = MotionUtils.resolveThemeDuration(
-                requireContext(),
-                com.google.android.material.R.attr.motionDurationLong2,
-                500
-            ).toLong()
-        }
+//        exitTransition = MaterialElevationScale(false).apply {
+//            duration = MotionUtils.resolveThemeDuration(
+//                requireContext(),
+//                com.google.android.material.R.attr.motionDurationLong2,
+//                500
+//            ).toLong()
+//        }
+//        reenterTransition = MaterialElevationScale(true).apply {
+//            duration = MotionUtils.resolveThemeDuration(
+//                requireContext(),
+//                com.google.android.material.R.attr.motionDurationLong2,
+//                500
+//            ).toLong()
+//
+//            addListener(object: TransitionListenerAdapter() {
+//                override fun onTransitionEnd(transition: Transition) {
+//                    super.onTransitionEnd(transition)
+//                }
+//
+//            })
+//        }
 
     }
 
@@ -82,6 +91,8 @@ class CleaningFragment : Fragment() {
 
             viewModel.setSelectedCleaning(cleaning)
 
+            setupTransitionForSharedElementTransition()
+
             findNavController().navigate(action, extras)
         }
         listAdapter.submitList(viewModel.cleaningList.value)
@@ -95,4 +106,36 @@ class CleaningFragment : Fragment() {
             listAdapter.submitList(it)
         }
     }
+
+    private fun setupTransitionForSharedElementTransition() {
+        val initialExitTransition = exitTransition
+        val initialReenterTransition = reenterTransition
+
+
+        exitTransition = MaterialElevationScale(false).apply {
+            duration = MotionUtils.resolveThemeDuration(
+                requireContext(),
+                com.google.android.material.R.attr.motionDurationLong2,
+                500
+            ).toLong()
+        }
+        reenterTransition = MaterialElevationScale(true).apply {
+            duration = MotionUtils.resolveThemeDuration(
+                requireContext(),
+                com.google.android.material.R.attr.motionDurationLong2,
+                500
+            ).toLong()
+
+            // reset initial transitions
+            addListener(object: TransitionListenerAdapter() {
+                override fun onTransitionEnd(transition: Transition) {
+                    super.onTransitionEnd(transition)
+                    exitTransition = initialExitTransition
+                    reenterTransition = initialReenterTransition
+                }
+
+            })
+        }
+    }
+
 }

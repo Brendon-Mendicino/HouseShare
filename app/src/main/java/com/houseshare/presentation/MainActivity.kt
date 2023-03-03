@@ -48,9 +48,10 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        setupNavigation()
-
+        // Drawer must be setup before the navigation
         setupDrawerLayout()
+
+        setupNavigation()
 
         setupFab()
     }
@@ -70,10 +71,6 @@ class MainActivity : AppCompatActivity() {
             drawerLayout
         )
 
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
-
-
         // Set initial destination:
         // the nav navGraph needs to be inflated programmatically,
         // the value "app:navGraph" needs to be removed from xml
@@ -85,22 +82,25 @@ class MainActivity : AppCompatActivity() {
         }
         navController.graph = navGraph
 
+
         binding.run {
             navController.addOnDestinationChangedListener { controller, destination, arguments ->
-                when(destination.id) {
+                // fab animation
+                when (destination.id) {
                     R.id.cleaningExploreFragment -> appBarMain.fab.hide()
-                    else -> appBarMain.fab.show() 
+                    else -> appBarMain.fab.show()
                 }
 
                 if (topLevelDestinationIds.contains(destination.id)) {
                     viewModel.updateStartingDestination(destination.id)
                 }
             }
-            
+
         }
 
+        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
+        toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
 

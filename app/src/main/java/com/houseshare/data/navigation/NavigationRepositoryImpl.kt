@@ -8,6 +8,7 @@ import com.houseshare.domain.navigation.Destination
 import com.houseshare.domain.navigation.NavigationRepository
 import com.houseshare.domain.navigation.NavigationSettings
 import com.houseshare.domain.navigation.NavigationSettingsSerializer
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 import java.io.IOException
@@ -27,6 +28,16 @@ class NavigationRepositoryImpl @Inject constructor(
     private val appContext: Application,
 ) : NavigationRepository {
 
+    override fun fetchNavigation(): Flow<NavigationSettings> =
+        appContext.dataStore.data
+            .catch {
+                if (it is IOException) {
+                    Log.e(TAG, "fetchInitialNavigation: Failed to read data.", it)
+                    emit(NavigationSettings())
+                } else {
+                    throw it
+                }
+            }
 
     override suspend fun fetchInitialNavigation(): NavigationSettings =
         appContext.dataStore.data

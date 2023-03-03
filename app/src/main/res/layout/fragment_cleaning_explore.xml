@@ -64,6 +64,29 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/interval" />
 
+                <RelativeLayout
+                    android:id="@+id/checkContainer"
+                    tools:ignoreViewBinding="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/completeIndicator" >
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true" />
+
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/Widget.Material3.Button.IconButton"
+                        android:layout_alignParentEnd="true"
+                        android:drawableStart="@drawable/id_done_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
                 <com.google.android.material.divider.MaterialDivider
                     android:id="@+id/divider"
                     tools:viewBindingIgnore="true"
