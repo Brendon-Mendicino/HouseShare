@@ -129,6 +129,11 @@ class MainActivity : AppCompatActivity() {
             // passed down to descendant views.
             WindowInsetsCompat.CONSUMED
         }
+
+        // show the fragment
+        fab.setOnClickListener {
+
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

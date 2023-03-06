@@ -37,5 +37,9 @@
         android:name="com.houseshare.presentation.cleaning.CleaningExploreFragment"
         android:label="fragment_cleaning_explore"
         tools:layout="@layout/fragment_cleaning_explore"/>
+    <fragment
+        android:id="@+id/addItemFragment"
+        android:name="com.houseshare.presentation.add.AddItemFragment"
+        android:label="AddItemFragment" />
 
 </navigation>

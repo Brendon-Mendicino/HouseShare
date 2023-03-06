@@ -8,7 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.*
+import androidx.core.view.WindowCompat
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
@@ -20,12 +21,9 @@ import com.google.android.material.transition.MaterialContainerTransform
 import com.houseshare.R
 import com.houseshare.databinding.FragmentCleaningExploreBinding
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 /**
  * A simple [Fragment] subclass.
- * Use the [CleaningExploreFragment.newInstance] factory method to
- * create an instance of this fragment.
  */
 class CleaningExploreFragment : Fragment() {
 
@@ -86,6 +84,8 @@ class CleaningExploreFragment : Fragment() {
 
         setupTexts()
 
+        setupCompleteButton()
+
         setupRecyclerView()
     }
 
@@ -129,6 +129,9 @@ class CleaningExploreFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun setupCompleteButton() {
     }
 
     private fun setupRecyclerView() {

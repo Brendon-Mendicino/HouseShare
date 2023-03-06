@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".presentation.cleaning.CleaningExploreFragment">
 
-    <com.google.android.material.card.MaterialCardView
-        style="@style/Widget.Material3.CardView.Filled"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
@@ -74,14 +73,20 @@
                     app:layout_constraintTop_toBottomOf="@id/completeIndicator" >
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:text="@string/complete_task"
+                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                        android:textColor="?attr/colorOnSurfaceVariant"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true" />
+                        android:layout_margin="8dp"
+                        android:layout_toStartOf="@id/done"
+                        android:layout_centerVertical="true" />
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/done"
                         style="@style/Widget.Material3.Button.IconButton"
                         android:layout_alignParentEnd="true"
-                        android:drawableStart="@drawable/id_done_24"
+                        app:icon="@drawable/id_done_24"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -96,7 +101,7 @@
                     app:dividerColor="?colorOutline"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/completeIndicator" />
+                    app:layout_constraintTop_toBottomOf="@id/checkContainer" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/listDescription"
@@ -130,7 +135,7 @@
 
         </androidx.core.widget.NestedScrollView>
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
 
 </FrameLayout>
